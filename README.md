@@ -19,3 +19,9 @@ Models
 2. `ollama pull mistral`
 3. `ollama pull nomic-embed-text`
 4. `streamlit run Home.py`
+
+
+### refs
+[https://docs.runpod.io/tutorials/pods/run-ollama]
+`apt update`
+`apt install pciutils`

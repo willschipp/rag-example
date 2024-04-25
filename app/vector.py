@@ -7,7 +7,10 @@ from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
 
 DB_FAISS_PATH = 'vectorstore/db_faiss_nomic_full'
+# DB_FAISS_PATH = 'vectorstore/db_faiss_nomic_rh_sub'
 EMBEDDINGS_MODEL = "nomic-embed-text"
+# BASE_URL = "http://localhost:11434"
+BASE_URL = "https://n9j5ig1wzy764c-11434.proxy.runpod.net"
 
 class Vector:
 
@@ -16,10 +19,10 @@ class Vector:
 
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
-        self.embeddings = OllamaEmbeddings(model=EMBEDDINGS_MODEL)
+        self.embeddings = OllamaEmbeddings(model=EMBEDDINGS_MODEL,base_url=BASE_URL)
         if os.path.exists(DB_FAISS_PATH):
             self.db = FAISS.load_local(DB_FAISS_PATH,
-                                    OllamaEmbeddings(model=EMBEDDINGS_MODEL),
+                                    OllamaEmbeddings(model=EMBEDDINGS_MODEL,base_url=BASE_URL),
                                     allow_dangerous_deserialization=True) #TODO remove
             
 
