@@ -10,7 +10,7 @@ st.header("Ask questions of the PDF")
 query = st.text_input("Enter your question here")
 
 option = st.selectbox('Please choose a model',
-                      ('mistral','llama2','llama3'),
+                      ('mistral','llama2','llama3','llama2:70b','llama3:70b'),
                       on_change=handle_change,
                       key='model')
 
