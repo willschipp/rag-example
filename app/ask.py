@@ -11,7 +11,8 @@ QUESTION_MODEL_LLAMA_2 = "llama2"
 QUESTION_MODEL_LLAMA_3 = "llama3"
 
 # BASE_URL = "http://localhost:11434"
-BASE_URL = "https://n9j5ig1wzy764c-11434.proxy.runpod.net"
+BASE_URL = "https://hsipo4p3av3f60-11434.proxy.runpod.net/"
+
 
 PROMPT = """Answer the following question based only on the provided context:
         <context>
@@ -28,7 +29,7 @@ class Ask:
     llm = None
     vector = None
     prompt = None
-    model_name = QUESTION_MODEL
+    model_name = None
 
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
@@ -43,6 +44,7 @@ class Ask:
         #get the retriever
         logging.info("getting the context")
         retriever = self.vector.getRetriever(question)
+        logging.info(self.model_name)
         llm = Ollama(model=self.model_name,base_url=BASE_URL)
         #build the chain
         rag_chain = (
@@ -56,4 +58,9 @@ class Ask:
         return rag_chain.stream(question)
     
     def change_model(self,model):
+        # if model == 'llama2:70b':
+        #     self.model_name = 'llama2:70b'
+        # elif model == 'llama3:70b':
+        #     self.model_name = 'llama3:70b'
+        # else:
         self.model_name = model

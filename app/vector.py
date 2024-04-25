@@ -10,7 +10,7 @@ DB_FAISS_PATH = 'vectorstore/db_faiss_nomic_full'
 # DB_FAISS_PATH = 'vectorstore/db_faiss_nomic_rh_sub'
 EMBEDDINGS_MODEL = "nomic-embed-text"
 # BASE_URL = "http://localhost:11434"
-BASE_URL = "https://n9j5ig1wzy764c-11434.proxy.runpod.net"
+BASE_URL = "https://hsipo4p3av3f60-11434.proxy.runpod.net"
 
 class Vector:
 
