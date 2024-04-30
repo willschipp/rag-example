@@ -59,8 +59,8 @@ def embed(pages):
     )
 
 def clean_text(pages):
-    nltk.download('punkt')
-    nltk.download('stopwords')
+    nltk.download('punkt') #TODO fix the docker location nltk.download('treebank', download_dir='/mnt/data/treebank')
+    nltk.download('stopwords') #TODO fix the docker location
     clean_pages = []
     stop_words = list(stopwords.words('english'))
     for page in pages:
