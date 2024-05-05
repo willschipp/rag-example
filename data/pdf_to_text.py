@@ -8,6 +8,7 @@ from nltk.corpus import stopwords
 import chromadb
 
 import json
+import os
 
 from chromadb.utils import embedding_functions
 
@@ -17,7 +18,7 @@ def extract_text(pdf):
 
     pages = []
 
-    i = 0
+    i = 0    
 
     while (i<len(reader.pages)):
         page = reader.pages[i]
@@ -25,13 +26,14 @@ def extract_text(pdf):
         #process the page
         text = page.extract_text()
         pageObj = {"number":i,
+                   "book":pdf,
                    "content":text}
         pages.append(pageObj)
     
     return pages
 
-def dump_pages(pages):
-    with open("./book1.json","w") as write:
+def dump_pages(pages,outputname):
+    with open(outputname + ".json","w") as write:
         json.dump(pages,write)
 
 def embed(pages):
@@ -69,8 +71,15 @@ def clean_text(pages):
         clean_text = [word.lower() for word in filtered_text if word.isalpha()]
         clean_page = {"content":page['content'],
                       "number":page['number'],
+                      "book":page['book'],
                       "clean_text":clean_text}
         clean_pages.append(clean_page)
     return clean_pages        
 
-
+def convert_files():
+    # get all the files in a location
+    pdfs = os.listdir('./')
+    for pdf in pdfs:
+        pages = extract_text("./" + pdf)
+        pages = clean_text(pages)
+        dump_pages(pages,pdf)

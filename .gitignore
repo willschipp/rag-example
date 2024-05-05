@@ -1,3 +1,6 @@
 venv
 __pycache__
 *.pdf
+*.json
+*.tar.gz*
+db/
